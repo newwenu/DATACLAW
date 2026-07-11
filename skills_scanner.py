@@ -103,7 +103,6 @@ def generate_skills_prompt(skills_dir: Path) -> str:
         return ""
 
     skills_xml = generate_skills_xml(skills)
-    print(skills_xml)
 
     return f"""
 ## 技能系统 (Agent Skills)
@@ -124,5 +123,3 @@ def generate_skills_prompt(skills_dir: Path) -> str:
 - `read_skill_file(path)` - 读取技能目录内的任意文件，path 相对于 skills/ 文件夹。
   例如: `patent_disclosure/SKILL.md`、`patent_disclosure/prompts/intake.md`、`get_weather/SKILL.md`
 """
-
-print(generate_skills_prompt(Path("skills")))
