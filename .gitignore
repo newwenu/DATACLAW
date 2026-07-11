@@ -20,3 +20,15 @@ paper/
 
 # 对话日志
 memory/logs/
+
+
+# Mock 场景（可选，如需版本控制可移除）
+.mock/
+
+# IDE
+.vscode/
+.idea/
+
+# 工作空间与输出
+workspace/
+*output/

@@ -8,6 +8,7 @@ from langchain_core.tools import BaseTool
 from .arxiv_search_tool import create_arxiv_search_tool
 from .python_repl_tool import create_python_repl_tool
 from .read_file_tool import create_read_file_tool, create_read_skill_tool
+from .summer_analysis_tool import create_summer_analysis_tool
 from .terminal_tool import create_terminal_tool
 from .write_memory_tool import create_write_memory_tool
 
@@ -17,6 +18,7 @@ def get_all_tools(base_dir: Union[Path, str]) -> List[BaseTool]:
     base_dir = Path(base_dir) if isinstance(base_dir, str) else base_dir
     memory_dir = base_dir / "memory"
     skills_dir = base_dir / "skills"
+    data_dir = base_dir / "DATA_analysis"
     return [
         create_terminal_tool(base_dir),
         create_python_repl_tool(),
@@ -24,4 +26,5 @@ def get_all_tools(base_dir: Union[Path, str]) -> List[BaseTool]:
         create_read_skill_tool(skills_dir),
         create_write_memory_tool(memory_dir),
         create_arxiv_search_tool(),
+        create_summer_analysis_tool(data_dir),
     ]
