@@ -1,6 +1,10 @@
 # 环境变量
 .env
 
+# Python 环境
+.venv/
+.python/
+
 # Python 缓存
 __pycache__/
 *.pyc

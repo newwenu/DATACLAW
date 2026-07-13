@@ -251,6 +251,7 @@ ChatView {
     border-left: solid $primary;
     border-right: solid $primary;
     padding: 0;
+    overflow-y: auto;
 }
 
 #completion-list {
@@ -259,6 +260,7 @@ ChatView {
     width: 100%;
     border: none;
     background: transparent;
+    overflow-y: auto;
 }
 
 #completion-list > ListItem {
