@@ -33,7 +33,7 @@ class SafeTerminalTool(BaseTool):
     description: str = (
         "【终端执行器 - 全能模式】在沙盒环境中执行 shell 命令。 "
         "适用于：复杂文件操作（grep/find/awk/管道）、安装依赖、运行脚本、系统命令等。 "
-        "特点：① 支持任意 shell 命令和管道 ② 可创建/修改/删除文件 ③ 30秒超时保护。 "
+        "特点：① 支持任意 shell 命令和管道 ② 可创建/修改/删除文件。 "
         "注意：简单文件查看建议使用 read_file 工具（更安全、自动截断大文件）。 "
         "危险命令（rm -rf / 等）会被拦截。"
     )
@@ -57,7 +57,6 @@ class SafeTerminalTool(BaseTool):
                 cwd=self.root_dir,
                 capture_output=True,
                 text=True,
-                timeout=30,
                 encoding="utf-8",
                 errors="replace",
             )
@@ -66,12 +65,9 @@ class SafeTerminalTool(BaseTool):
                 output += f"\n[stderr]: {result.stderr}"
             if not output.strip():
                 output = "(command completed with no output)"
-            # Truncate very long output
             if len(output) > 5000:
                 output = output[:5000] + "\n...[truncated]"
             return output
-        except subprocess.TimeoutExpired:
-            return "❌ Command timed out (30s limit)"
         except Exception as e:
             return f"❌ Error: {str(e)}"
 

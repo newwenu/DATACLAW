@@ -1,0 +1,118 @@
+[build-system]
+requires = ["setuptools>=75.0"]
+build-backend = "setuptools.build_meta"
+
+# ============================================================================
+# Project Metadata (PEP 621)
+# ============================================================================
+
+[project]
+name = "dataclaw"
+version = "2.0.0"
+description = "DataClaw — 易扩展的终端 AI 智能体"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [
+    { name = "14 group Team" },
+]
+keywords = ["ai", "agent", "langgraph", "tui", "data-analysis"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+# ---- Core Dependencies ----
+dependencies = [
+    # LangChain
+    "langchain-core>=0.3.0",
+    "langchain-deepseek>=0.1.0",
+    "langchain-community>=0.3.0",
+    "langchain-openai>=0.2.0",
+    "langgraph>=0.2.0",
+    "langchain-experimental>=0.3.0",
+    # Config
+    "python-dotenv>=1.0.0",
+    "pydantic>=2.0",
+    "pydantic-settings>=2.0",
+    # TUI
+    "textual>=0.50.0",
+    "rich>=13.0",
+    # Data
+    "numpy>=1.24.0",
+    "pandas>=2.0.0",
+    "matplotlib>=3.7.0",
+    # Utils
+    "pyyaml>=6.0",
+    "httpx>=0.27.0,<1.0",
+]
+
+[project.optional-dependencies]
+# PDF translation skill
+pdf = ["pdf2zh-next"]
+# Dev tools
+dev = [
+    "ruff>=0.5.0",
+    "pytest>=8.0",
+    "ipython>=8.0",
+]
+
+[project.scripts]
+dataclaw = "Claw:main"
+
+# ============================================================================
+# Setuptools
+# ============================================================================
+
+[tool.setuptools]
+py-modules = [
+    "Claw",
+    "tui",
+    "background_loop",
+    "memory_manager",
+    "skills_scanner",
+]
+
+[tool.setuptools.packages.find]
+include = ["core*", "tools*", "ui*", "tasks*"]
+
+# ============================================================================
+# Ruff
+# ============================================================================
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "UP",   # pyupgrade
+    "B",    # flake8-bugbear
+    "SIM",  # flake8-simplify
+]
+ignore = [
+    "E501",  # line too long (handled by formatter)
+    "B008",  # function call in default argument
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["core", "tools", "ui", "tasks"]
+
+# ============================================================================
+# Pytest
+# ============================================================================
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]

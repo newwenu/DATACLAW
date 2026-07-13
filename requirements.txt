@@ -1,5 +1,5 @@
 # ============================================================
-# Claw — 核心依赖（仅包含实际使用的包）
+# DataClaw — 核心依赖
 # 安装: pip install -r requirements.txt
 # ============================================================
 
@@ -7,6 +7,7 @@
 langchain-core>=0.3.0                  # 基础消息/工具抽象
 langchain-deepseek>=0.1.0              # DeepSeek 模型集成
 langchain-community>=0.3.0             # 社区集成（含 ChatTongyi/Qwen）
+langchain-openai>=0.2.0                # OpenAI 兼容接口（proxy 模式）
 langgraph>=0.2.0                       # ReAct Agent 框架
 langchain-experimental>=0.3.0          # Python REPL 工具
 
@@ -16,8 +17,14 @@ pydantic>=2.0                          # 数据校验
 pydantic-settings>=2.0                 # .env 配置管理
 
 # ---- TUI ----
-textual>=0.40.0                        # 终端 UI 框架
+textual>=0.50.0                        # 终端 UI 框架
 rich>=13.0                             # 富文本渲染
 
-# ---- 系统 ----
-httpx>=0.27.0,<1.0                     # HTTP 客户端（langchain 传递依赖，锁定版本避免 conda 混装冲突）
+# ---- 数据分析 ----
+numpy>=1.24.0                          # 数值计算
+pandas>=2.0.0                          # 数据处理
+matplotlib>=3.7.0                      # 绑图
+
+# ---- 工具 ----
+pyyaml>=6.0                            # YAML 解析（mock 场景加载）
+httpx>=0.27.0,<1.0                     # HTTP 客户端
