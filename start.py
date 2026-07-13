@@ -99,11 +99,15 @@ def create_venv() -> bool:
     venv_py = _venv_python()
     if venv_py.exists():
         print("[*] 正在升级 pip ...")
-        subprocess.run(
+        result = subprocess.run(
             [str(venv_py), "-m", "pip", "install", "--upgrade", "pip"],
-            check=False,
             capture_output=True,
+            text=True,
         )
+        if result.returncode != 0:
+            print("[!] pip 升级失败，可能影响后续依赖安装。")
+            if result.stderr.strip():
+                print(f"    {result.stderr.strip()}")
 
     print("[+] 虚拟环境创建完成。\n")
     return True
